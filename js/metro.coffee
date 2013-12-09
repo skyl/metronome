@@ -22,16 +22,16 @@ class Metronome
     @audioContext.createGainNode()
     @is_playing = false
     @lookahead = @opts.lookahead or 25.0
-    @schedule_ahead_time =@opts.schedule_ahead_time or 0.1
+    @schedule_ahead_time = @opts.schedule_ahead_time or 0.1
     @tempo = @opts.tempo or 120
-    @seconds_per_tick = 60 / @tempo / 32
+    @seconds_per_tick = 60 / @tempo / 24
     @next_tick_time = @audioContext.currentTime
     @current_tick = 0
     @players = []
 
   advance: () ->
-    # grap current tempo
-    @seconds_per_tick = 60 / @tempo / 32
+    # grab current tempo
+    @seconds_per_tick = 60 / @tempo / 24
     @next_tick_time += @seconds_per_tick
     @current_tick++
 
@@ -85,9 +85,7 @@ class Random440HarmonyPlayer
       osc.stop time + suss
 
 
-
-
-window.addEventListener "load", () ->
+main = () ->
   window.m = new Metronome {
     tempo: 60
   }
@@ -96,3 +94,5 @@ window.addEventListener "load", () ->
     new Random440HarmonyPlayer(),
   ]
   m.start()
+
+window.Metronome = Metronome
