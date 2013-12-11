@@ -37,6 +37,9 @@
 
     Metronome.prototype.schedule = function() {
       var player, self, _i, _len, _ref;
+      if (!this.is_playing) {
+        return;
+      }
       while (this.next_tick_time < this.audioContext.currentTime + this.schedule_ahead_time) {
         _ref = this.players;
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
@@ -52,10 +55,13 @@
     };
 
     Metronome.prototype.start = function() {
+      this.next_tick_time = this.audioContext.currentTime + this.schedule_ahead_time;
+      this.is_playing = true;
       return this.schedule();
     };
 
     Metronome.prototype.stop = function() {
+      this.is_playing = false;
       return clearTimeout(this.timer);
     };
 

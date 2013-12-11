@@ -36,6 +36,8 @@ class Metronome
     @current_tick++
 
   schedule: () =>
+    if not @is_playing
+      return
     while @next_tick_time < @audioContext.currentTime + @schedule_ahead_time
         for player in @players
           player.play @current_tick, @next_tick_time, @tempo, this
@@ -46,9 +48,12 @@ class Metronome
     , @lookahead
 
   start: () ->
+    @next_tick_time = @audioContext.currentTime + @schedule_ahead_time
+    @is_playing = true
     @schedule()
 
   stop: () ->
+    @is_playing = false
     clearTimeout @timer
 
 
