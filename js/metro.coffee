@@ -20,7 +20,7 @@ class Metronome
 
     @audioContext = new AudioContext()
     #https://code.google.com/p/chromium/issues/detail?id=159359
-    @audioContext.createGainNode()
+    @audioContext.createGain()
     @is_playing = false
     @lookahead = @opts.lookahead or 25.0
     @schedule_ahead_time = @opts.schedule_ahead_time or 0.1

@@ -24,7 +24,7 @@
       this.opts = opts;
       this.schedule = __bind(this.schedule, this);
       this.audioContext = new AudioContext();
-      this.audioContext.createGainNode();
+      this.audioContext.createGain();
       this.is_playing = false;
       this.lookahead = this.opts.lookahead || 25.0;
       this.schedule_ahead_time = this.opts.schedule_ahead_time || 0.1;
